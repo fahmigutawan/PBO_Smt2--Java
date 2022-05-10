@@ -46,8 +46,18 @@ public class MapCollection {
         //Change weight of team members that have 165 height.
         obj.setValue(Tim.B, ValueType.Berat, 5, 66);
         obj.setValue(Tim.B, ValueType.Berat, 9, 66);
+        System.out.print("""
+                Data terbaru tim B setelah tinggi 168 diupdate adalah:
+                """);
+        for (int i = 1; i <= timB.size(); i++) {
+            System.out.println("Pemain-" + i + " " + timB.get(i));
+        }
+        System.out.println();
 
-        //
+        //Put all values of members who has equals height to new Map.
+
+
+        //Filtering to new Map that only team members who has 168++ height left.
     }
 
     void init() {
