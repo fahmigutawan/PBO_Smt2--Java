@@ -1,6 +1,7 @@
 package com.company.prak.laprak_bab8;
 
 import com.company.prak.laprak_bab8.utils.Tim;
+import com.company.prak.laprak_bab8.utils.ValueType;
 import kotlin.Unit;
 
 import java.util.*;
@@ -13,6 +14,10 @@ public class MapCollection {
         MapCollection obj = new MapCollection();
         obj.init();
 
+        obj.soalKedua(obj);
+    }
+
+    void soalPertama(MapCollection obj) {
         System.out.println("""
                 Tinggi badan sama:
                 """ + obj.getSameTB() + "\n");
@@ -37,6 +42,14 @@ public class MapCollection {
                 """ + obj.getUniqueBB(Tim.B) + "\n");
     }
 
+    void soalKedua(MapCollection obj) {
+        //Change weight of team members that have 165 height.
+        obj.setValue(Tim.B, ValueType.Berat, 5, 66);
+        obj.setValue(Tim.B, ValueType.Berat, 9, 66);
+
+        //
+    }
+
     void init() {
         timA.put(1, Arrays.asList(168, 50));
         timA.put(2, Arrays.asList(170, 60));
@@ -59,6 +72,16 @@ public class MapCollection {
         timB.put(8, Arrays.asList(171, 68));
         timB.put(9, Arrays.asList(168, 65));
         timB.put(10, Arrays.asList(169, 60));
+    }
+
+    void setValue(Tim tim, ValueType valueType, int key, int value) {
+        var tmpTim = timA;
+        var tmpIndex = 0;
+
+        if (tim.equals(Tim.B)) tmpTim = timB;
+        if (valueType.equals(ValueType.Berat)) tmpIndex = 1;
+
+        tmpTim.get(key).set(tmpIndex, value);
     }
 
     int getMaxTB(Tim tim) {
