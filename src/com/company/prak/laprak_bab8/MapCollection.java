@@ -6,6 +6,8 @@ import kotlin.Unit;
 
 import java.util.*;
 
+/**INI TAMBAHAN*/
+
 public class MapCollection {
     Map<Integer, List<Integer>> timA = new HashMap<>();
     Map<Integer, List<Integer>> timB = new HashMap<>();
@@ -15,6 +17,30 @@ public class MapCollection {
         obj.init();
 
         obj.soalKedua(obj);
+    }
+
+    void init() {
+        timA.put(1, Arrays.asList(168, 50));
+        timA.put(2, Arrays.asList(170, 60));
+        timA.put(3, Arrays.asList(165, 56));
+        timA.put(4, Arrays.asList(168, 55));
+        timA.put(5, Arrays.asList(172, 60));
+        timA.put(6, Arrays.asList(170, 70));
+        timA.put(7, Arrays.asList(169, 66));
+        timA.put(8, Arrays.asList(165, 56));
+        timA.put(9, Arrays.asList(171, 72));
+        timA.put(10, Arrays.asList(166, 56));
+
+        timB.put(1, Arrays.asList(170, 66));
+        timB.put(2, Arrays.asList(167, 60));
+        timB.put(3, Arrays.asList(165, 59));
+        timB.put(4, Arrays.asList(166, 58));
+        timB.put(5, Arrays.asList(168, 58));
+        timB.put(6, Arrays.asList(175, 71));
+        timB.put(7, Arrays.asList(172, 68));
+        timB.put(8, Arrays.asList(171, 68));
+        timB.put(9, Arrays.asList(168, 65));
+        timB.put(10, Arrays.asList(169, 60));
     }
 
     void soalPertama(MapCollection obj) {
@@ -55,35 +81,37 @@ public class MapCollection {
         System.out.println();
 
         //Put all values of members who has equals height to new Map.
-
+        System.out.print("""
+                Data member yang memiliki tinggi sama dengan A
+                """);
+        var tmpAtoB = getMapOfSameTB();
+        for (int i = 1; i <= tmpAtoB.size(); i++) {
+            System.out.println("A => " + tmpAtoB.get(i).get(0) + " B => " + tmpAtoB.get(i).get(1));
+        }
+        var tmpAtoA = getMapOfSameTBSameTeam();
+        for (int i = 1; i <= tmpAtoA.size(); i++) {
+            System.out.println("A => " + tmpAtoA.get(i));
+        }
+        System.out.println();
 
         //Filtering to new Map that only team members who has 168++ height left.
+        System.out.print("""
+                Data member yang memiliki tinggi 168 keatas
+                """);
+        var tmpFiltered1 = getMapOfSameTBMoreThan168(tmpAtoB);
+        var tmpFiltered2 = getMapOfSameTBSameTeamMoreThan168(tmpAtoA);
+
+        for (int i = 1; i <= tmpFiltered1.size(); i++) {
+            System.out.println("A => " + tmpFiltered1.get(i).get(0) + " B => " + tmpFiltered1.get(i).get(1));
+        }
+        for (int i = 1; i <= tmpFiltered2.size(); i++) {
+            System.out.println("A => " + tmpFiltered2.get(i));
+        }
     }
 
-    void init() {
-        timA.put(1, Arrays.asList(168, 50));
-        timA.put(2, Arrays.asList(170, 60));
-        timA.put(3, Arrays.asList(165, 56));
-        timA.put(4, Arrays.asList(168, 55));
-        timA.put(5, Arrays.asList(172, 60));
-        timA.put(6, Arrays.asList(170, 70));
-        timA.put(7, Arrays.asList(169, 66));
-        timA.put(8, Arrays.asList(165, 56));
-        timA.put(9, Arrays.asList(171, 72));
-        timA.put(10, Arrays.asList(166, 56));
-
-        timB.put(1, Arrays.asList(170, 66));
-        timB.put(2, Arrays.asList(167, 60));
-        timB.put(3, Arrays.asList(165, 59));
-        timB.put(4, Arrays.asList(166, 58));
-        timB.put(5, Arrays.asList(168, 58));
-        timB.put(6, Arrays.asList(175, 71));
-        timB.put(7, Arrays.asList(172, 68));
-        timB.put(8, Arrays.asList(171, 68));
-        timB.put(9, Arrays.asList(168, 65));
-        timB.put(10, Arrays.asList(169, 60));
-    }
-
+    /**
+     * [START] Methods for "soal pertama"
+     **/
     void setValue(Tim tim, ValueType valueType, int key, int value) {
         var tmpTim = timA;
         var tmpIndex = 0;
@@ -255,4 +283,121 @@ public class MapCollection {
 
         return result;
     }
+    /**[END]**/
+
+    /**
+     * [START] Methods for "soal kedua"
+     **/
+    Map<Integer, List<List<Integer>>> getMapOfSameTB() {
+        Map<Integer, List<List<Integer>>> result = new HashMap<>();
+
+        var tmpA = timA;
+        var tmpB = timB;
+        var newIndex = 1;
+
+        for (int i = 1; i <= timA.size(); i++) {
+            for (int j = 1; j <= timB.size(); j++) {
+                if (tmpA.get(i) != null && tmpB.get(j) != null) {
+                    if (tmpA.get(i).get(0).equals(tmpB.get(j).get(0))) {
+                        result.put(
+                                newIndex,
+                                Arrays.asList(
+                                        Arrays.asList(i, tmpA.get(i).get(0), tmpA.get(i).get(1)),
+                                        Arrays.asList(j, tmpB.get(j).get(0), tmpB.get(j).get(1))
+                                )
+                        );
+                        newIndex++;
+                        tmpB.remove(j);
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    Map<Integer, List<Integer>> getMapOfSameTBSameTeam() {
+        Map<Integer, List<Integer>> result = new HashMap<>();
+
+        var tmpA = timA;
+        var tmpA2 = timA;
+        var newIndex = 1;
+
+        for (int i = 1; i <= timA.size(); i++) {
+            for (int j = 1; j <= timA.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+                if (tmpA.get(i) == null || tmpA2.get(j) == null) {
+                    continue;
+                }
+                if (tmpA.get(i).get(0).equals(tmpA2.get(j).get(0))) {
+                    result.put(
+                            newIndex,
+                            Arrays.asList(
+                                    j,
+                                    tmpA2.get(j).get(0),
+                                    tmpA2.get(j).get(1)
+                            )
+                    );
+                    tmpA2.remove(j);
+                    newIndex++;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    Map<Integer, List<List<Integer>>> getMapOfSameTBMoreThan168(Map<Integer, List<List<Integer>>> map) {
+        var tmp = map;
+        Map<Integer, List<List<Integer>>> result = new HashMap<>();
+        var newIndex = 1;
+
+        for (int i = 1; i <= tmp.size(); i++) {
+            if (tmp.get(i).get(0).get(1) >= 168) {
+                result.put(
+                        newIndex,
+                        Arrays.asList(
+                                Arrays.asList(
+                                        tmp.get(i).get(0).get(0),
+                                        tmp.get(i).get(0).get(1),
+                                        tmp.get(i).get(0).get(2)
+                                ),
+                                Arrays.asList(
+                                        tmp.get(i).get(1).get(0),
+                                        tmp.get(i).get(1).get(1),
+                                        tmp.get(i).get(1).get(2)
+                                )
+                        )
+                );
+                newIndex++;
+            }
+        }
+
+        return result;
+    }
+
+    Map<Integer, List<Integer>> getMapOfSameTBSameTeamMoreThan168(Map<Integer, List<Integer>> map) {
+        Map<Integer, List<Integer>> result = new HashMap<>();
+        var tmp = map;
+        var newIndex = 1;
+
+        for (int i = 1; i <= tmp.size(); i++) {
+            if (tmp.get(i).get(1) >= 168) {
+                result.put(
+                        newIndex,
+                        Arrays.asList(
+                                tmp.get(i).get(0),
+                                tmp.get(i).get(1),
+                                tmp.get(i).get(2)
+                        )
+                );
+                newIndex++;
+            }
+        }
+
+        return result;
+    }
+    /**[END]**/
 }
