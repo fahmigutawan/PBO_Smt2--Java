@@ -36,7 +36,7 @@ public class Main {
             arrBoth.add(arrB.get(i));
         }
 
-        //obj.soalSatu(arrA, arrB, arrBoth);
+        /*obj.soalSatu(arrA, arrB, arrBoth);*/
 
         obj.soalDua(arrA, arrB, arrBoth);
     }
