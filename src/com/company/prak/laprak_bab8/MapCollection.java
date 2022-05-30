@@ -54,18 +54,18 @@ public class MapCollection {
                 Rentang tinggi badan:
                 A ==> %d
                 B ==> %d
-                \n""", (obj.getMaxTB(Tim.A) - obj.getMinTB(Tim.A)), (obj.getMaxTB(Tim.B) - obj.getMinTB(Tim.B)));
+                \n""", (obj.getMaxTBA() - obj.getMinTBA()), (obj.getMaxTBB() - obj.getMinTBB()));
         System.out.printf("""
                 Rentang berat badan:
                 A ==> %d
                 B ==> %d
-                \n""", (obj.getMaxBB(Tim.A) - obj.getMinBB(Tim.A)), (obj.getMaxBB(Tim.B) - obj.getMinBB(Tim.B)));
+                \n""", (obj.getMaxBBA() - obj.getMinBBA()), (obj.getMaxBBB() - obj.getMinBBB()));
         System.out.println("""
                 Tinggi badan A yang tidak terdapat pada B
-                """ + obj.getUniqueTB(Tim.A) + "\n");
+                """ + obj.getUniqueTBA() + "\n");
         System.out.println("""
                 Berat badan B yang tidak terdapat pada A
-                """ + obj.getUniqueBB(Tim.B) + "\n");
+                """ + obj.getUniqueBBB() + "\n");
     }
 
     void soalKedua(MapCollection obj) {
@@ -122,7 +122,7 @@ public class MapCollection {
         tmpTim.get(key).set(tmpIndex, value);
     }
 
-    int getMaxTB(Tim tim) {
+/*    int getMaxTB(Tim tim) {
         var tmpTim = timA;
         if (tim == Tim.B) {
             tmpTim = timB;
@@ -133,9 +133,29 @@ public class MapCollection {
             biggestItem = Math.max(biggestItem, tmpTim.get(i).get(0));
         }
         return biggestItem;
+    }*/
+    //OTHER ALTERNATIF (imply to all)
+    int getMaxTBA() {
+        var tmpTim = timA;
+
+        var biggestItem = -1;
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            biggestItem = Math.max(biggestItem, tmpTim.get(i).get(0));
+        }
+        return biggestItem;
+    }
+    int getMaxTBB() {
+        var tmpTim = timB;
+
+        var biggestItem = -1;
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            biggestItem = Math.max(biggestItem, tmpTim.get(i).get(0));
+        }
+        return biggestItem;
     }
 
-    int getMaxBB(Tim tim) {
+
+/*    int getMaxBB(Tim tim) {
         var tmpTim = timA;
         if (tim == Tim.B) {
             tmpTim = timB;
@@ -146,9 +166,27 @@ public class MapCollection {
             biggestItem = Math.max(biggestItem, tmpTim.get(i).get(1));
         }
         return biggestItem;
+    }*/
+    int getMaxBBA() {
+        var tmpTim = timA;
+
+        var biggestItem = -1;
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            biggestItem = Math.max(biggestItem, tmpTim.get(i).get(1));
+        }
+        return biggestItem;
+    }
+    int getMaxBBB() {
+        var tmpTim = timB;
+
+        var biggestItem = -1;
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            biggestItem = Math.max(biggestItem, tmpTim.get(i).get(1));
+        }
+        return biggestItem;
     }
 
-    int getMinTB(Tim tim) {
+/*    int getMinTB(Tim tim) {
         var tmpTim = timA;
         if (tim == Tim.B) {
             tmpTim = timB;
@@ -159,9 +197,26 @@ public class MapCollection {
             smallestItem = Math.min(smallestItem, tmpTim.get(i).get(0));
         }
         return smallestItem;
+    }*/
+    int getMinTBA() {
+        var tmpTim = timA;
+        var smallestItem = tmpTim.get(1).get(0);
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            smallestItem = Math.min(smallestItem, tmpTim.get(i).get(0));
+        }
+        return smallestItem;
+    }
+    int getMinTBB() {
+        var tmpTim = timB;
+        var smallestItem = tmpTim.get(1).get(0);
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            smallestItem = Math.min(smallestItem, tmpTim.get(i).get(0));
+        }
+        return smallestItem;
     }
 
-    int getMinBB(Tim tim) {
+
+/*    int getMinBB(Tim tim) {
         var tmpTim = timA;
         if (tim == Tim.B) {
             tmpTim = timB;
@@ -172,7 +227,26 @@ public class MapCollection {
             smallestItem = Math.min(smallestItem, tmpTim.get(i).get(1));
         }
         return smallestItem;
+    }*/
+    int getMinBBA() {
+        var tmpTim = timA;
+
+        var smallestItem = tmpTim.get(1).get(1);
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            smallestItem = Math.min(smallestItem, tmpTim.get(i).get(1));
+        }
+        return smallestItem;
     }
+    int getMinBBB() {
+        var tmpTim = timB;
+
+        var smallestItem = tmpTim.get(1).get(1);
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            smallestItem = Math.min(smallestItem, tmpTim.get(i).get(1));
+        }
+        return smallestItem;
+    }
+
 
     ArrayList<Integer> getSameTB() {
         var result = new ArrayList<Integer>();
@@ -230,7 +304,7 @@ public class MapCollection {
         return result;
     }
 
-    ArrayList<Integer> getUniqueTB(Tim tim) {
+/*    ArrayList<Integer> getUniqueTB(Tim tim) {
         var tmpTim = timA;
         var oppositeTim = timB;
         var result = new ArrayList<Integer>();
@@ -255,9 +329,31 @@ public class MapCollection {
         }
 
         return result;
+    }*/
+    ArrayList<Integer> getUniqueTBA() {
+        var tmpTim = timA;
+        var oppositeTim = timB;
+        var hasil = new ArrayList<Integer>();
+
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            var firstTmp = tmpTim.get(i).get(0);
+            var isUnique = true;
+            for (int j = 1; j <= oppositeTim.size(); j++) {
+                var secTmp = oppositeTim.get(j).get(0);
+                if (firstTmp.equals(secTmp)) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                hasil.add(firstTmp);
+            }
+        }
+
+        return hasil;
     }
 
-    ArrayList<Integer> getUniqueBB(Tim tim) {
+/*    ArrayList<Integer> getUniqueBB(Tim tim) {
         var tmpTim = timA;
         var oppositeTim = timB;
         var result = new ArrayList<Integer>();
@@ -266,6 +362,28 @@ public class MapCollection {
             tmpTim = timB;
             oppositeTim = timA;
         }
+        for (int i = 1; i <= tmpTim.size(); i++) {
+            var firstTmp = tmpTim.get(i).get(1);
+            var isUnique = true;
+            for (int j = 1; j <= oppositeTim.size(); j++) {
+                var secTmp = oppositeTim.get(j).get(1);
+                if (firstTmp.equals(secTmp)) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
+                result.add(firstTmp);
+            }
+        }
+
+        return result;
+    }*/
+    ArrayList<Integer> getUniqueBBB() {
+        var tmpTim = timB;
+        var oppositeTim = timA;
+        var result = new ArrayList<Integer>();
+
         for (int i = 1; i <= tmpTim.size(); i++) {
             var firstTmp = tmpTim.get(i).get(1);
             var isUnique = true;
