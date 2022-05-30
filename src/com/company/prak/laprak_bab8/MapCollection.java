@@ -15,8 +15,6 @@ public class MapCollection {
     public static void main(String[] args) {
         MapCollection obj = new MapCollection();
         obj.init();
-
-        obj.soalKedua(obj);
     }
 
     void init() {
