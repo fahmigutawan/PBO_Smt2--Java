@@ -16,8 +16,10 @@ public class JavaStringBuilder {
         System.out.println(sb3.capacity());
         System.out.println(sb3.toString());
         sb3.append(" Java");
+        System.out.println(sb3.capacity());
         System.out.println(sb3.toString());
         sb3.insert(11, " Builder");
+        System.out.println(sb3.capacity());
         System.out.println(sb3.toString());
         System.out.println(sb3.compareTo(sb2));
         System.out.println(sb3.equals(sb2));
