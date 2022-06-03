@@ -13,7 +13,7 @@ public class JavaStringJoiner {
         sj1.add("France");
         sj1.add("Germany");
         System.out.println(sj1);
-        sj1.merge(sj1);
-        System.out.println(sj1);
+        sj.merge(sj1);
+        System.out.println(sj);
     }
 }
