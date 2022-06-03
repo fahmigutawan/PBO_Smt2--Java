@@ -5,23 +5,17 @@ import java.util.StringJoiner;
 public class Main {
     public static void main(String[] args) {
 
-/*        new JavaString();
-        new JavaStringBuffer();
-        new JavaStringBuilder();
-        new JavaStringJoiner();*/
-        new JavaStringTokenizer();
-
         //new JavaString();
 
         //new JavaStringBuffer();
 
         //new JavaStringBuilder();
 
-        //new JavaStringJoiner();
+        new JavaStringJoiner();
 
         //new JavaStringTokenizer();
 
-        new JavaPraktikum();
+        //new JavaPraktikum();
 
     }
 }
